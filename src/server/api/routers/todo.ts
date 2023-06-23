@@ -42,6 +42,7 @@ export const todoRouter = createTRPCRouter({
       },
     })
   }),
+
   updateStatus: privateProcedure.input(
     z.object({
       id: z.string(),
@@ -57,5 +58,13 @@ export const todoRouter = createTRPCRouter({
         status,
       }
     })
-  })
+  }),
+
+  getOneTodo: privateProcedure.input(z.string()).query(async ({ ctx, input }) => {
+    return ctx.prisma.todo.findFirst({
+      where: {
+        id: input
+      }
+    })
+  }),
 });

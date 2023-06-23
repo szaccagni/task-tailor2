@@ -10,7 +10,7 @@ type TodoProps = {
 	setShowEditPg: (arg: any) => void;
 }
 
-export function Todo({ todo, setTodoId, setShowEditPg}: TodoProps) {
+export function Todo({ todo, setTodoId, setShowEditPg }: TodoProps) {
 	const { id, title, description, dueDate, status } = todo
 	const [showDescription, setShowDescription] = useState(false)
 
@@ -49,10 +49,17 @@ export function Todo({ todo, setTodoId, setShowEditPg}: TodoProps) {
 				<div className='flex justify-between w-full items-center'>
 					<div>{title}</div>
 					<div className='flex items-center'>
-						<div className='mr-3'>
-							<Status status={status} id={id}/>
+						<div className='mr-3'>DUE: &nbsp; 
+							{new Date(dueDate).toLocaleDateString("en-US")}{" "}
+							{new Date(dueDate).toLocaleTimeString("en-US", {
+								// hour12: false,
+								hour: "2-digit",
+								minute: "2-digit",
+							})}
 						</div>
-						<div>DUE DATE</div>
+						<div>
+							<Status status={status} id={id} />
+						</div>
 					</div>
 				</div>
 			</div>
