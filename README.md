@@ -1,28 +1,36 @@
-# Create T3 App
+# Task Tailor
+Built for the Software Engineering Super League (SESL)
 
+Prompt: 
+For this challenge, you are going to build a task tracker app. Your minimum requirements are:
+* Create a task with a title, description, status (completed, in progress, etc.), and due date
+* Edit and delete Tasks
+* View all tasks, and sort by title, status, and due date
+* Users can log in by entering their name and will only see their tasks. That means, I should be able to enter “Maya”, add tasks for Maya and only see Maya’s tasks when I enter that name, whenever I visit the Task Tracker App
+* For this challenge, you are going to build a task tracker app. Your minimum requirements are:
+Create a task with a title, description, status (completed, in progress, etc.), and due date
+Edit and delete Tasks
+View all tasks, and sort by title, status, and due date
+Users can log in by entering their name and will only see their tasks. That means, I should be able to enter “Maya”, add tasks for Maya and only see Maya’s tasks when I enter that name, whenever I visit the Task Tracker App
+As a user, I should be able to access my tasks from any device – that means, the data needs to be stored server-side.As a user, I should be able to access my tasks from any device – that means, the data needs to be stored server-side.
+
+## Preview
+![all tasks](/public/tasks-all.png)
+
+## Technologies 
 This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
-
-## What's next? How do I make an app with this?
-
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
-
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
-
 - [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
+- [Clerk](https://clerk.com/)
 - [Prisma](https://prisma.io)
 - [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+- [tRPC](https://trpc.io) 
 
-## Learn More
+Addional Technologies Used: 
+- [zod](https://zod.dev/)
+- [MUI](https://mui.com/)
+- [dayjs](https://day.js.org/)
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
-
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
-
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
-
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+## Next Steps
+* refactor code, utlizing the advantages of typescript more
+* add conditional color styling based on due date and status
+* resolve issue with time zones in production
