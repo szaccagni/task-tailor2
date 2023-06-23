@@ -1,3 +1,4 @@
+import type { Todo } from '../utils/types'
 import { useUser, } from '@clerk/nextjs'
 import NavBar from "~/components/NavBar";
 import CreateTodo from "~/components/CreateTodo";
