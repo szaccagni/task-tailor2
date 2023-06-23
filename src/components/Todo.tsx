@@ -13,6 +13,7 @@ type TodoProps = {
 export function Todo({ todo, setTodoId, setShowEditPg }: TodoProps) {
 	const { id, title, description, dueDate, status } = todo
 	const [showDescription, setShowDescription] = useState(false)
+	const [isHovered, setIsHovered] = useState(false);
 
 	const ctx = api.useContext()
 
@@ -27,9 +28,19 @@ export function Todo({ todo, setTodoId, setShowEditPg }: TodoProps) {
 		setShowEditPg(true)
 	}
 
+	const handleMouseEnter = () => {
+		setIsHovered(true);
+	};
+
+	const handleMouseLeave = () => {
+		setIsHovered(false);
+	};
+
 	return (
 		<div
 			className="bg-slate-200	 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full mb-3.5 p-4"
+			onMouseEnter={handleMouseEnter}
+			onMouseLeave={handleMouseLeave}
 		>
 			<div className="flex items-center">
 				<button
@@ -37,7 +48,7 @@ export function Todo({ todo, setTodoId, setShowEditPg }: TodoProps) {
 					className='pr-2 cursor-pointer'
 				>
 					{!showDescription &&
-						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-5 h-5">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className={`w-5 h-5 ${ isHovered ? 'bg-white rounded-xl' : ''}`}>
 							<path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
 						</svg>}
 					{showDescription &&
@@ -49,7 +60,7 @@ export function Todo({ todo, setTodoId, setShowEditPg }: TodoProps) {
 				<div className='flex justify-between w-full items-center'>
 					<div>{title}</div>
 					<div className='flex items-center'>
-						<div className='mr-3'>DUE: &nbsp; 
+						<div className='mr-3'>DUE: &nbsp;
 							{new Date(dueDate).toLocaleDateString("en-US", { timeZone: 'America/New_York' })}{" "}
 							{new Date(dueDate).toLocaleTimeString("en-US", {
 								// hour12: false,
