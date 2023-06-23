@@ -27,7 +27,7 @@ export const todoRouter = createTRPCRouter({
           authorId,
           title: input.title,
           description: input.description,
-          dueDate: new Date(input.dueDate),
+          dueDate: new Date(input.dueDate).toISOString(),
           status: 'NOT STARTED'
         },
       });
