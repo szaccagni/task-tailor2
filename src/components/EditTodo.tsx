@@ -17,10 +17,6 @@ export default function EditTodo({ setShowEditPg, todoId }: EditTodoProps) {
         status: '',
     });
 
-    //   const formatDate = foundTodo?.dueDate
-    //     ? new Date(foundTodo.dueDate).toISOString().slice(0, 16)
-    //     : '';
-
     useEffect(() => {
         if (foundTodo) {
             setUpdatedTodo({
@@ -34,7 +30,6 @@ export default function EditTodo({ setShowEditPg, todoId }: EditTodoProps) {
     }, [foundTodo]);
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        let formatDate = foundTodo?.dueDate ? dayjs(foundTodo.dueDate).format('YYYY-MM-DDTHH:mm') : '';
         const { name, value } = e.target;
         setUpdatedTodo((prevTodo) => ({
             ...prevTodo,
