@@ -10,6 +10,7 @@ type EditTodoProps = {
 export default function EditTodo({ setShowEditPg, todoId }: EditTodoProps) {
     const { data: foundTodo, isLoading } = api.todo.getOneTodo.useQuery(todoId);
     const [updatedTodo, setUpdatedTodo] = useState({
+        id: '',
         title: '',
         description: '',
         dueDate: '',
@@ -19,27 +20,36 @@ export default function EditTodo({ setShowEditPg, todoId }: EditTodoProps) {
     //   const formatDate = foundTodo?.dueDate
     //     ? new Date(foundTodo.dueDate).toISOString().slice(0, 16)
     //     : '';
-    const formatDate = foundTodo?.dueDate ? dayjs(foundTodo.dueDate).format('YYYY-MM-DDTHH:mm') : '';
-
 
     useEffect(() => {
         if (foundTodo) {
             setUpdatedTodo({
+                id: foundTodo.id,
                 title: foundTodo.title,
                 description: foundTodo.description,
-                dueDate: formatDate,
+                dueDate: dayjs(foundTodo.dueDate).format('YYYY-MM-DDTHH:mm'),
                 status: foundTodo.status,
             });
         }
-    }, [foundTodo, formatDate]);
+    }, [foundTodo]);
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        let formatDate = foundTodo?.dueDate ? dayjs(foundTodo.dueDate).format('YYYY-MM-DDTHH:mm') : '';
         const { name, value } = e.target;
         setUpdatedTodo((prevTodo) => ({
             ...prevTodo,
             [name]: value,
         }));
     };
+
+    const ctx = api.useContext()
+
+    const { mutate } = api.todo.updateTodo.useMutation({
+        onSuccess: () => {
+			void ctx.todo.getAll.invalidate()
+            setShowEditPg(false)
+		}
+    })
 
     if (isLoading) {
         return <div>Loading... 🔄</div>;
@@ -70,8 +80,8 @@ export default function EditTodo({ setShowEditPg, todoId }: EditTodoProps) {
                     <form
                         onSubmit={(e) => {
                             e.preventDefault();
-                            // mutate(updatedTodo)
-                            console.log('submitted');
+                            mutate(updatedTodo)
+                            console.log(updatedTodo);
                         }}
                         className="flex flex-col gap-3"
                     >
@@ -110,7 +120,7 @@ export default function EditTodo({ setShowEditPg, todoId }: EditTodoProps) {
                                 id='due'
                                 name="dueDate"
                                 type='datetime-local'
-                                value={formatDate}
+                                value={updatedTodo?.dueDate ? dayjs(updatedTodo.dueDate).format('YYYY-MM-DDTHH:mm') : ''}
                                 onChange={handleInputChange}
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                 disabled={isLoading}
