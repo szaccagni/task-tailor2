@@ -1,9 +1,10 @@
 import type { Todo } from '../utils/types'
-import { useUser, } from '@clerk/nextjs'
 import NavBar from "~/components/NavBar";
 import CreateTodo from "~/components/CreateTodo";
 import Todos from "~/components/Todos";
 import { useState } from "react";
+import { SignInButton, useUser } from '@clerk/nextjs'
+
 
 
 const Greeting = () => {
@@ -15,13 +16,16 @@ const Greeting = () => {
     return (<div>loading...</div>)
   } else if (!isSignedIn) {
     return (
-      <div className="relative">
+      <SignInButton mode="modal">
+      <div className="relative cursor-pointer">
         <img src='/needle-black.png' className='opacity-50' alt='needle and thread'></img>
         <div className="absolute inset-0 flex items-center justify-center">
           <h3 className="text-cente font-bold text-6xl">Sign Up / Sign In to Begin Tailoring Your Tasks</h3>
         </div>
+      </div>
+      </SignInButton>
 
-      </div>)
+      )
   } else {
     return (
       <>

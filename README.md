@@ -41,3 +41,4 @@ Addional Technologies Used:
 * refactor code, utlizing the advantages of typescript more
 * add conditional color styling based on due date and status
 * resolve issue with time zones in production
+* mobile optimization

@@ -10,12 +10,16 @@ export default function NavBar() {
                     <img src='/needle-black.png' className='w-10'></img>
                     <div>Task Tailor</div>
                 </div>
-                <div className='flex'>
-                    <div className="w-12 mr-5 cursor-pointer" onClick={() => window.open('https://github.com/szaccagni/task-tailor2', '_blank')}>
+                <div className='flex items-center'>
+                    <div className="w-10 mr-5 cursor-pointer" onClick={() => window.open('https://github.com/szaccagni/task-tailor2', '_blank')}>
                         <img src="/github-logo.png" alt="GitHub Logo" />
                     </div>
                     <SignedOut>
-                        <SignInButton mode="modal"></SignInButton>
+                        <SignInButton mode="modal">
+                            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                Sign in
+                            </button>
+                        </SignInButton>
                     </SignedOut>
                     {isSignedIn &&
                         <UserButton
