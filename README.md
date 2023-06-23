@@ -14,6 +14,13 @@ View all tasks, and sort by title, status, and due date
 Users can log in by entering their name and will only see their tasks. That means, I should be able to enter “Maya”, add tasks for Maya and only see Maya’s tasks when I enter that name, whenever I visit the Task Tracker App
 As a user, I should be able to access my tasks from any device – that means, the data needs to be stored server-side.As a user, I should be able to access my tasks from any device – that means, the data needs to be stored server-side.
 
+
+## Get started by clicking Sign In in the upper right hand corner
+![get started](/public/signin-screenshot.png)
+
+## New users should click Sign up at the bottom of this modal
+![signup modal](/public/signIn-modal.png)
+
 ## Preview
 ![all tasks](/public/tasks-all.png)
 
