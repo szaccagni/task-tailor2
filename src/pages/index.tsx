@@ -9,22 +9,29 @@ import { useState } from "react";
 const Greeting = () => {
   // Use the useUser hook to get the Clerk.user object
   const { isLoaded, isSignedIn } = useUser()
-  const [ showComponents, setShowComponents ] = useState('todos')
+  const [showComponents, setShowComponents] = useState('todos')
 
   if (!isLoaded) {
-    return (<div>loading</div>)
+    return (<div>loading...</div>)
   } else if (!isSignedIn) {
-    return (<div>not signed in</div>)
+    return (
+      <div className="relative">
+        <img src='/needle-black.png' className='opacity-50' alt='needle and thread'></img>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <h3 className="text-cente font-bold text-6xl">Sign Up / Sign In to Begin Tailoring Your Tasks</h3>
+        </div>
+
+      </div>)
   } else {
     return (
       <>
-      {
-        showComponents === 'todos' && 
-        <div className="w-2/5">
-          <Todos setShowComponents={setShowComponents}/>
-        </div>
-      }
-      { showComponents === 'create' && <CreateTodo setShowComponents={setShowComponents}/> }
+        {
+          showComponents === 'todos' &&
+          <div className="w-2/5">
+            <Todos setShowComponents={setShowComponents} />
+          </div>
+        }
+        {showComponents === 'create' && <CreateTodo setShowComponents={setShowComponents} />}
       </>
     )
   }
