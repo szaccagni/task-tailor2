@@ -1,14 +1,13 @@
-import Head from "next/head";
 import { useUser, } from '@clerk/nextjs'
 import NavBar from "~/components/NavBar";
 import CreateTodo from "~/components/CreateTodo";
 import Todos from "~/components/Todos";
-import { use, useState } from "react";
+import { useState } from "react";
 
 
 const Greeting = () => {
   // Use the useUser hook to get the Clerk.user object
-  const { isLoaded, isSignedIn, user } = useUser()
+  const { isLoaded, isSignedIn } = useUser()
   const [ showComponents, setShowComponents ] = useState('todos')
 
   if (!isLoaded) {

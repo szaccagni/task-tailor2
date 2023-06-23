@@ -3,18 +3,15 @@ import { useUser } from '@clerk/nextjs'
 import { api } from '../utils/api'
 
 type CreateTodoProps = {
-    setShowComponents: Function;
+    setShowComponents: (arg: any) => void;
 };
 
 export default function CreateTodo({ setShowComponents }: CreateTodoProps) {
-    const { user } = useUser();
     const [newTodo, setNewTodo] = useState({
         title: '',
         description: '',
         dueDate: ''
     })
-
-    const ctx = api.useContext()
 
     const { mutate, isLoading } = api.todo.create.useMutation({
         onSuccess: () => {

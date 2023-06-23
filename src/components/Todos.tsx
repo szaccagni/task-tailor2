@@ -2,7 +2,7 @@ import { api } from '../utils/api'
 import { Todo } from './Todo';
 
 type CreateTodoProps = {
-    setShowComponents: Function;
+    setShowComponents: (arg: any) => void;
 };
 
 export default function Todos({ setShowComponents }: CreateTodoProps) {

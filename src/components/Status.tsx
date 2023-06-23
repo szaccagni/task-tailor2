@@ -30,7 +30,7 @@ export default function Status({ status, id }: InputProps) {
     const ctx = api.useContext()
 
     const { mutate } = api.todo.updateStatus.useMutation({
-        onSuccess: async () => {
+        onSuccess: () => {
 			void ctx.todo.getAll.invalidate()
 		}
     })
@@ -52,9 +52,9 @@ export default function Status({ status, id }: InputProps) {
                 }}
             >
                 <div>
-                    {possibileStatus.map((stati) => {
+                    {possibileStatus.map((stati, idx) => {
                         return (
-                            <div>
+                            <div key={idx}>
                                 <Button
                                     onClick={() => {mutate({id: id, status: stati}), handleClose()}}
                                 >{stati}</Button>

@@ -15,7 +15,7 @@ export function Todo({ todo }: TodoProps) {
 	const ctx = api.useContext()
 
 	const { mutate: deleteMutation } = api.todo.delete.useMutation({
-		onSuccess: async () => {
+		onSuccess: () => {
 			void ctx.todo.getAll.invalidate()
 		}
 	})
@@ -45,7 +45,7 @@ export function Todo({ todo }: TodoProps) {
 						<div className='mr-3'>
 							<Status status={status} id={id}/>
 						</div>
-						<div> DUE DATE </div>
+						<div>DUE DATE</div>
 					</div>
 				</div>
 			</div>
