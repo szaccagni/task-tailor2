@@ -50,9 +50,10 @@ export function Todo({ todo, setTodoId, setShowEditPg }: TodoProps) {
 					<div>{title}</div>
 					<div className='flex items-center'>
 						<div className='mr-3'>DUE: &nbsp; 
-							{new Date(dueDate).toLocaleDateString("en-US")}{" "}
+							{new Date(dueDate).toLocaleDateString("en-US", { timeZone: 'America/New_York' })}{" "}
 							{new Date(dueDate).toLocaleTimeString("en-US", {
 								// hour12: false,
+								timeZone: 'America/New_York',
 								hour: "2-digit",
 								minute: "2-digit",
 							})}
