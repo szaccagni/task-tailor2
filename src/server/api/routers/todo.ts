@@ -2,14 +2,63 @@ import { z } from "zod";
 import { createTRPCRouter, privateProcedure } from "~/server/api/trpc";
 
 export const todoRouter = createTRPCRouter({
-  getAll: privateProcedure.query(async ({ ctx }) => {
-    const todos = await ctx.prisma.todo.findMany({
-      where: {
-        authorId: ctx.userId
-      }
-    })
-    return todos.map(todo => todo)
+  // getAll: privateProcedure.query(async ({ ctx }) => {
+  //   const todos = await ctx.prisma.todo.findMany({
+  //     where: {
+  //       authorId: ctx.userId
+  //     }
+  //   })
+  //   return todos.map(todo => todo)
+  // }),
+  getAll: privateProcedure.input(z.string()).query(async ({ ctx, input }) => {
+    let todos;
+
+    switch (input) {
+      case 'title':
+        todos = await ctx.prisma.todo.findMany({
+          where: {
+            authorId: ctx.userId
+          },
+          orderBy: {
+            title: 'asc'
+          }
+        });
+        break;
+
+      case 'dueDate':
+        todos = await ctx.prisma.todo.findMany({
+          where: {
+            authorId: ctx.userId
+          },
+          orderBy: {
+            dueDate: 'asc'
+          }
+        });
+        break;
+
+      case 'status':
+        todos = await ctx.prisma.todo.findMany({
+          where: {
+            authorId: ctx.userId
+          },
+          orderBy: {
+            status: 'asc'
+          }
+        });
+        break;
+
+      default:
+        todos = await ctx.prisma.todo.findMany({
+          where: {
+            authorId: ctx.userId
+          }
+        });
+        break;
+    }
+
+    return todos.map(todo => todo);
   }),
+
 
   create: privateProcedure
     .input(

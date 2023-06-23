@@ -21,7 +21,6 @@ const Greeting = () => {
       {
         showComponents === 'todos' && 
         <div className="w-2/5">
-          <h3 className="text-xl font-bold mb-4">Tailor Your Tasks</h3>
           <Todos setShowComponents={setShowComponents}/>
         </div>
       }
