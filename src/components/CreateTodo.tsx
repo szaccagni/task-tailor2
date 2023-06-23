@@ -2,7 +2,11 @@ import { useState, ChangeEvent } from 'react'
 import { useUser } from '@clerk/nextjs'
 import { api } from '../utils/api'
 
-export default function CreateTodo() {
+type CreateTodoProps = {
+    setShowComponents: Function;
+};
+
+export default function CreateTodo({ setShowComponents }: CreateTodoProps) {
     const { user } = useUser();
     const [newTodo, setNewTodo] = useState({
         title: '',
@@ -19,6 +23,7 @@ export default function CreateTodo() {
                 description: '',
                 dueDate: ''
             })
+            setShowComponents('todos')
         }
     })
 
@@ -32,6 +37,13 @@ export default function CreateTodo() {
 
     return (
         <div className='w-2/5'>
+            <button
+            onClick={() => setShowComponents('todos')}
+                className="inline-block rounded border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10 mb-10"
+            >  <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd"></path>
+                </svg>
+                Back to Tasks</button>
             <form onSubmit={(e) => {
                 e.preventDefault()
                 mutate(newTodo)
@@ -44,7 +56,7 @@ export default function CreateTodo() {
                         type='text'
                         value={newTodo.title}
                         onChange={handleInputChange}
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-900 dark:border-gray-700"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         disabled={isLoading}
                     ></input>
                 </div>
@@ -56,7 +68,7 @@ export default function CreateTodo() {
                         type='text'
                         value={newTodo.description}
                         onChange={handleInputChange}
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-900 dark:border-gray-700"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         disabled={isLoading}
                     ></input>
                 </div>
@@ -68,11 +80,11 @@ export default function CreateTodo() {
                         type='datetime-local'
                         value={newTodo.dueDate}
                         onChange={handleInputChange}
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-900 dark:border-gray-700"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         disabled={isLoading}
                     ></input>
                 </div>
-                
+
                 <button
                     className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
                 >Log Task</button>

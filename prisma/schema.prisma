@@ -15,8 +15,7 @@ model Todo {
   title       String
   description String
   dueDate     DateTime
-  inProgress  Boolean  @default(false)
-  done        Boolean  @default(false)
+  status      String
   authorId    String
 
   @@index([authorId])

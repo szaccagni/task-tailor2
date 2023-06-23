@@ -8,6 +8,7 @@ export const todoRouter = createTRPCRouter({
         authorId: ctx.userId
       }
     })
+    return todos.map(todo => todo)
   }),
 
   create: privateProcedure
@@ -27,9 +28,34 @@ export const todoRouter = createTRPCRouter({
           title: input.title,
           description: input.description,
           dueDate: new Date(input.dueDate),
+          status: 'NOT STARTED'
         },
       });
 
       return newTodo;
     }),
+
+  delete: privateProcedure.input(z.string()).mutation(async ({ ctx, input }) => {
+    return ctx.prisma.todo.delete({
+      where: {
+        id: input
+      },
+    })
+  }),
+  updateStatus: privateProcedure.input(
+    z.object({
+      id: z.string(),
+      status: z.string()
+    })
+  ).mutation(({ ctx, input }) => {
+    const { id, status } = input
+    return ctx.prisma.todo.update({
+      where: {
+        id,
+      },
+      data: {
+        status,
+      }
+    })
+  })
 });
