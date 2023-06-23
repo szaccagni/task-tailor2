@@ -19,7 +19,9 @@ export default function Todos({ setShowComponents }: TodosProps) {
     return (
         <>
             <div className='flex items-center justify-between'>
-                <h3 className="text-xl font-bold mb-4">Tailor Your Tasks</h3>
+                {!showEditPg && <h3 className="text-xl font-bold mb-4">Tailor Your Tasks</h3>}
+                { todos.length && !showEditPg ?
+                <>
                 <div className='flex items-center mb-4'>
                     <div className='flex items-center'>
                         <div className='mr-3'>
@@ -37,7 +39,8 @@ export default function Todos({ setShowComponents }: TodosProps) {
                             <option selected={sortBy === 'dueDate'} value='dueDate'>due date</option>
                         </select>
                     </div>
-                </div>
+                </div> 
+                </> : ''}
 
             </div>
             {todos.length ?
